@@ -1,0 +1,44 @@
+<body style="background-color: #f3f4f6; font-family: Arial, sans-serif; margin: 0; padding: 0;">
+	<table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="background-color: #ffffff; border: 1px solid #d1d5db; border-radius: 8px; overflow: hidden;">
+
+		<!-- Header -->
+		<tr>
+			<td align="center" style="background-color: #1f2937; padding: 20px;">
+				<h1 style="color: #ffffff; margin: 0; font-size: 24px;">Subscription Confirmation</h1>
+			</td>
+		</tr>
+
+		<!-- Body Content -->
+		<tr>
+			<td style="padding: 30px;">
+				<h2 style="font-size: 20px; color: #111827; margin-bottom: 20px;">Hi <%= @user.name %>,</h2>
+
+				<p style="font-size: 16px; color: #4b5563; margin-bottom: 20px;">
+					You have successfully subscribed to the <strong><%= @plan.name %></strong> plan.
+				</p>
+
+				<p style="font-size: 16px; color: #4b5563; margin-bottom: 20px;">
+					You now have <strong><%= @plan.tests_allowed %></strong> tests available.
+					Your subscription is valid until <strong><%= @subscription.end_date.strftime("%B %d, %Y") %></strong>.
+				</p>
+
+				<p style="font-size: 16px; color: #4b5563;">
+					Thank you for choosing us!
+				</p>
+
+				<p style="font-size: 16px; color: #4b5563;">
+					Regards,<br>
+					Talent Test Team
+				</p>
+			</td>
+		</tr>
+
+		<!-- Footer -->
+		<tr>
+			<td align="center" style="background-color: #e5e7eb; padding: 20px; font-size: 12px; color: #6b7280;">
+				© <%= Time.current.year %> Talent Test. All rights reserved.
+			</td>
+		</tr>
+
+	</table>
+</body>

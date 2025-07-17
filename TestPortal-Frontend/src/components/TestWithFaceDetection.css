@@ -1,0 +1,71 @@
+.test-with-face-detection {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Hide video and canvas elements */
+.test-with-face-detection video,
+.test-with-face-detection canvas {
+  display: none !important;
+}
+
+/* Ensure the test content takes full space */
+.test-with-face-detection > *:not(video):not(canvas) {
+  width: 100%;
+  height: 100%;
+}
+
+/* Face Detection Warning Styles */
+.face-detection-warning-popup {
+  max-width: 400px !important;
+  padding: 1.5rem !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+.face-detection-warning-title {
+  color: #dc2626 !important;
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+  margin-bottom: 1rem !important;
+}
+
+.face-detection-warning-content {
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+  color: #374151 !important;
+}
+
+.face-detection-warning-content strong {
+  color: #dc2626 !important;
+}
+
+.face-detection-warning-button {
+  background-color: #dc2626 !important;
+  color: white !important;
+  font-weight: 600 !important;
+  padding: 0.75rem 1.5rem !important;
+  border-radius: 6px !important;
+  transition: background-color 0.2s !important;
+}
+
+.face-detection-warning-button:hover {
+  background-color: #b91c1c !important;
+}
+
+/* Animation for the warning popup */
+@keyframes warning-popup {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.face-detection-warning-popup {
+  animation: warning-popup 0.2s ease-out !important;
+} 

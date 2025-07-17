@@ -1,0 +1,46 @@
+User-agent: *
+Allow: /
+
+# Allow all public pages
+Allow: /about
+Allow: /contact
+Allow: /pricing
+Allow: /solutions/
+Allow: /terms
+Allow: /privacy
+Allow: /help
+Allow: /faq
+Allow: /login
+Allow: /signup
+
+# Disallow private/admin pages
+Disallow: /admin/
+Disallow: /account/
+Disallow: /dashboard/
+Disallow: /test/
+Disallow: /result/
+Disallow: /analytics/
+Disallow: /plans/
+Disallow: /subscriptions/
+Disallow: /checkout/
+Disallow: /token-checkout/
+Disallow: /share-link/
+Disallow: /verify-otp/
+Disallow: /face-detection-setup/
+Disallow: /respondent-details/
+Disallow: /attempt/
+Disallow: /response/
+Disallow: /edittest/
+Disallow: /newtest/
+Disallow: /ainewtest/
+Disallow: /test-attempt/
+Disallow: /test/:slug
+Disallow: /edittest/:slug
+Disallow: /result/:id
+Disallow: /response/:id
+
+# Sitemap location
+Sitemap: https://talenttest.io/sitemap.xml
+
+# Crawl delay (optional)
+Crawl-delay: 1 

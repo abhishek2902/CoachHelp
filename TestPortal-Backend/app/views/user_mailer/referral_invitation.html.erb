@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body style="background-color: #f3f4f6; font-family: Arial, sans-serif; margin: 0; padding: 0;">
+    <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="background-color: #ffffff; border: 1px solid #d1d5db; border-radius: 8px; overflow: hidden;">
+      
+      <!-- Header -->
+      <tr>
+        <td align="center" style="background-color: #1f2937; padding: 20px;">
+          <h1 style="color: #ffffff; margin: 0; font-size: 24px;">Talent Test</h1>
+        </td>
+      </tr>
+
+      <!-- Body Content -->
+      <tr>
+        <td style="padding: 30px;">
+          <p style="font-size: 18px; color: #111827; margin-bottom: 20px;">👋 Hello there!</p>
+
+          <p style="font-size: 16px; color: #4b5563; margin-bottom: 20px;">
+            Your friend <strong><%= @referrer.first_name %></strong> has invited you to join <strong>Talent Test</strong>, an intelligent platform for testing and challenges.
+          </p>
+
+          <p style="font-size: 16px; color: #4b5563; margin-bottom: 20px;">
+            Sign up now using the button below to claim your referral benefits!
+          </p>
+
+          <p style="text-align: center; margin: 30px 0;">
+            <a href="<%= @referral_link %>" style="background-color: #2563eb; color: #ffffff; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-size: 16px;">🎁 Join Talent Test Now</a>
+          </p>
+
+          <p style="font-size: 16px; color: #4b5563; margin-bottom: 20px;">
+            If you weren’t expecting this, you can safely ignore this email.
+          </p>
+
+          <p style="font-size: 16px; color: #4b5563;">
+            Cheers,<br>
+            The Talent Test Team
+          </p>
+        </td>
+      </tr>
+
+      <!-- Footer -->
+      <tr>
+        <td align="center" style="background-color: #e5e7eb; padding: 20px; font-size: 12px; color: #6b7280;">
+          © <%= Time.current.year %> Talent Test. All rights reserved.<br>
+          📩 <%= ENV['SUPPORT_EMAIL'] || 'support@talenttest.co' %> &nbsp; | &nbsp;
+          🌐 <a href="<%= ENV['FRONTEND_URL'] %>" style="color: #6b7280; text-decoration: underline;">www.talenttest.io</a>
+        </td>
+      </tr>
+
+    </table>
+  </body>
+</html>

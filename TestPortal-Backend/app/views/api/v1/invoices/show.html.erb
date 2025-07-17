@@ -1,0 +1,145 @@
+<% show_discount = @invoice.discount.to_f > 0 %>
+
+<% show_gst = @invoice.currency == 'INR' && @invoice.gst_amount.present? && @invoice.gst_amount.to_f > 0.0 %>
+
+<% show_currency_conversion = @invoice.has_currency_conversion? %>
+
+<div style="max-width: 800px; margin: 10px auto; padding: 30px; background: #ffffff; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #222; border: 1px solid #ddd; border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.06);">
+  <!-- Header -->
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 2px solid #4F46E5; padding-bottom: 15px;">
+    <div>
+      <img src="<%= asset_url(Rails.root.join('public', 'images', 'talenttest.png')) %>" alt="TalentTest Logo" style="height: 160px;">
+    </div>
+    <div style="text-align: right;">
+      <h1 style="margin: 0; font-size: 28px; color: #4F46E5;">Invoice</h1>
+      <p style="margin: 5px 0; font-size: 14px; color: #555;">#<%= @invoice.invoice_number %></p>
+      <p style="margin: 0; font-size: 14px; color: #555;">Issued: <%= @invoice.issued_at.strftime('%d %B %Y') %></p>
+      <% if show_currency_conversion %>
+        <p style="margin: 5px 0; font-size: 12px; color: #666;">Currency: <%= @invoice.display_currency %></p>
+      <% end %>
+    </div>
+  </div>
+
+  <!-- Details -->
+  <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: flex-start; margin-bottom: 30px; gap: 20px;">
+    <!-- Billed To -->
+    <div style="flex: 1;">
+      <h3 style="margin-bottom: 8px; color: #4F46E5;">Billed To:</h3>
+      <p style="margin: 0 0 5px 0; font-size: 14px;"><strong>Name:</strong> <%= @invoice.user_name %></p>
+      <p style="margin: 0 0 5px 0; font-size: 14px;"><strong>Email:</strong> <%= @invoice.user_email %></p>
+      <% if @invoice.user&.gst_number.present? %>
+        <p style="margin: 0 0 5px 0; font-size: 14px;"><strong>GSTIN:</strong> <%= @invoice.user.gst_number %></p>
+      <% end %>
+      <p style="margin: 0 0 5px 0; font-size: 14px;"><strong>Phone:</strong> <%= @invoice.user_phone.present? ? @invoice.user_phone : "N/A" %></p>
+    </div>
+
+    <!-- From -->
+    <div style="flex: 1;">
+      <h3 style="margin-bottom: 8px; color: #4F46E5;">From:</h3>
+      <p style="margin: 0 0 5px 0; font-size: 14px;">TalentTest</p>
+      <p style="margin: 0 0 5px 0; font-size: 14px;">Shadbox Infosystem Pvt. Ltd</p>
+      <p style="margin: 0 0 5px 0; font-size: 14px;">Nagpur City, 440013</p>
+      <p style="margin: 0; font-size: 14px;">GSTIN: <%= ENV['COMPANY_GST_NUMBER'] %></p>
+    </div>
+  </div>
+
+  <!-- Currency Conversion Info -->
+  <% if show_currency_conversion %>
+    <div style="background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; padding: 15px; margin-bottom: 20px;">
+      <h4 style="margin: 0 0 10px 0; color: #495057; font-size: 16px;">Currency Information</h4>
+      <div style="display: flex; justify-content: space-between; font-size: 14px;">
+        <span><strong>Original Amount:</strong> <%= @invoice.original_formatted_amount %></span>
+        <span><strong>Exchange Rate:</strong> <%= @invoice.exchange_rate_display %></span>
+        <span><strong>Converted Amount:</strong> <%= @invoice.formatted_display_amount %></span>
+      </div>
+    </div>
+  <% end %>
+
+  <!-- Invoice Table -->
+  <table style="width: 100%; border-collapse: collapse; margin-bottom: 25px; border: 1px solid #ddd;">
+    <thead>
+      <tr style="background: #EEF2FF; color: #333;">
+        <th style="padding: 14px; border: 1px solid #ddd; text-align: left;">Description</th>
+        <th style="padding: 14px; border: 1px solid #ddd; text-align: right;">Amount (<%= show_currency_conversion ? @invoice.display_currency : 'INR' %>)</th>
+        <% if show_discount %>
+          <th style="padding: 14px; border: 1px solid #ddd; text-align: right;">Discount (%)</th>
+          <th style="padding: 14px; border: 1px solid #ddd; text-align: right;">Discounted Amount (<%= show_currency_conversion ? @invoice.display_currency : 'INR' %>)</th>
+        <% end %>
+        <% if show_gst %>
+          <th style="padding: 14px; border: 1px solid #ddd; text-align: right;">GST (18%)</th>
+        <% end %>
+        <th style="padding: 14px; border: 1px solid #ddd; text-align: right;">Total (<%= show_currency_conversion ? @invoice.display_currency : 'INR' %>)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background: #F9FAFB;">
+        <td style="padding: 14px; border: 1px solid #ddd;"><%= @invoice.plan_name %></td>
+        <td style="padding: 14px; border: 1px solid #ddd; text-align: right;">
+          <% if show_currency_conversion %>
+            <%= @invoice.display_currency_symbol %><%= number_with_precision(@invoice.converted_base_amount, precision: 2) %>
+          <% else %>
+            ₹<%= number_with_precision(@invoice.base_amount, precision: 2) %>
+          <% end %>
+        </td>
+        <% if show_discount %>
+          <td style="padding: 14px; border: 1px solid #ddd; text-align: right;">
+            <%= @invoice.discount %>%
+          </td>
+          <td style="padding: 14px; border: 1px solid #ddd; text-align: right;">
+            <% if show_currency_conversion %>
+              <%= @invoice.display_currency_symbol %><%= number_with_precision(@invoice.converted_discounted_amount, precision: 2) %>
+            <% else %>
+              ₹<%= number_with_precision(@invoice.discounted_amount, precision: 2) %>
+            <% end %>
+          </td>
+        <% end %>
+        <% if show_gst %>
+          <td style="padding: 14px; border: 1px solid #ddd; text-align: right;">
+            ₹<%= number_with_precision(@invoice.gst_amount, precision: 2) %>
+          </td>
+        <% end %>
+        <td style="padding: 14px; border: 1px solid #ddd; text-align: right;">
+          <% if show_currency_conversion %>
+            <%= @invoice.display_currency_symbol %><%= number_with_precision(@invoice.converted_total_amount, precision: 2) %>
+          <% else %>
+            ₹<%= number_with_precision(@invoice.total_amount, precision: 2) %>
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Total Summary -->
+  <div style="text-align: right; margin-bottom: 30px;">
+    <p style="margin: 0; font-size: 18px; color: #111;">
+      <strong>Grand Total: <%= @invoice.formatted_display_amount %></strong>
+    </p>
+    <% if show_currency_conversion %>
+      <p style="margin: 5px 0; font-size: 12px; color: #666;">
+        Original: <%= @invoice.original_formatted_amount %> • Rate: <%= @invoice.exchange_rate_display %>
+      </p>
+    <% end %>
+  </div>
+
+  <!-- Payment Info -->
+  <div style="margin-bottom: 25px;">
+    <h3 style="margin-bottom: 5px; color: #4F46E5;">Payment Method:</h3>
+    <p style="margin: 0; font-size: 14px;">Razorpay</p>
+    <p style="margin: 5px 0; font-size: 14px;">Payment ID: <%= @invoice.payment_id %></p>
+    <p style="margin: 0; font-size: 14px;">Status: <span style="color: #27ae60;"><%= @invoice.status.titleize %></span></p>
+  </div>
+
+  <!-- Notes -->
+  <div style="margin-top: 35px; font-size: 13px; color: #666;">
+    <p>This is a system-generated invoice and does not require a signature.</p>
+    <p>Please retain this invoice for your records in accordance with applicable tax regulations.</p>
+    <% if show_currency_conversion %>
+      <p><strong>Note:</strong> This invoice shows amounts converted to <%= @invoice.display_currency %> for your convenience. The original transaction was processed in INR.</p>
+    <% end %>
+  </div>
+
+  <!-- Footer -->
+  <div style="text-align: center; margin-top: 50px; color: #999; font-size: 13px;">
+    <p style="margin: 0;">Thank you for choosing <span style="color: #4F46E5;"><strong>TalentTest</strong></span>!</p>
+  </div>
+</div>

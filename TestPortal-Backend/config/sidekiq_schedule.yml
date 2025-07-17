@@ -1,0 +1,5 @@
+daily_user_report:
+  cron: '0 18 * * *'  # Run at 6:00 PM every day
+  class: DailyUserReportJob
+  queue: default
+  description: "Daily user creation report sent at 6 PM" 

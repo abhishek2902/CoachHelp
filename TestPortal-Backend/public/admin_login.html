@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Login</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-box {
+      background-color: #ffffff;
+      padding: 40px 50px;
+      border: 1px solid #cccccc;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 350px;
+    }
+
+    .login-box h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 24px;
+      color: #333333;
+    }
+
+    .error-message {
+      background-color: #f8d7da;
+      color: #842029;
+      border: 1px solid #f5c2c7;
+      padding: 10px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #333333;
+    }
+
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #cccccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    input[type="submit"] {
+      width: 100%;
+      padding: 10px;
+      background-color: #0056b3;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #003d80;
+    }
+  </style>
+  <script>
+    // Optional: Check for ?error=1 in URL and display error
+    window.onload = function () {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get("error") === "1") {
+        const errorBox = document.createElement("div");
+        errorBox.className = "error-message";
+        errorBox.innerText = "Invalid email or password.";
+        document.querySelector(".login-box").insertBefore(errorBox, document.querySelector("form"));
+      }
+    };
+  </script>
+</head>
+<body>
+  <div class="login-box">
+    <h1>Admin Login</h1>
+    <form action="/admin_users/sign_in" method="post">
+      <!-- CSRF token should be injected here -->
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="admin_user[email]" required>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="admin_user[password]" required>
+
+      <input type="submit" value="Log in">
+    </form>
+  </div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!-- app/views/user_mailer/welcome_email.html.erb -->
+<body style="background-color: #f3f4f6; font-family: Arial, sans-serif; margin: 0; padding: 0;">
+  <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="background-color: #ffffff; border: 1px solid #d1d5db; border-radius: 8px; overflow: hidden;">
+    
+    <!-- Header -->
+    <tr>
+      <td align="center" style="background-color: #1f2937; padding: 20px;">
+        <h1 style="color: #ffffff; margin: 0; font-size: 24px;">Talent Test</h1>
+      </td>
+    </tr>
+
+    <!-- Body Content -->
+    <tr>
+      <td style="padding: 30px;">
+        <p style="font-size: 18px; color: #111827; margin-bottom: 20px;">🎉 Welcome to Talent Test, <%= @user.name || @user.email %>!</p>
+        
+        <p style="font-size: 16px; color: #4b5563; margin-bottom: 20px;">
+          We're excited to have you on board. Talent Test is your platform to discover, grow, and showcase your talents to the world.
+        </p>
+
+        <p style="font-size: 16px; color: #4b5563; margin-bottom: 20px;">
+          If you have any questions, feel free to reach out to our support team. We’re here to help!
+        </p>
+
+        <p style="font-size: 16px; color: #4b5563;">
+          Best regards,<br>
+          The Talent Test Team
+        </p>
+      </td>
+    </tr>
+
+    <!-- Footer -->
+    <tr>
+      <td align="center" style="background-color: #e5e7eb; padding: 20px; font-size: 12px; color: #6b7280;">
+        © <%= Time.current.year %> Talent Test. All rights reserved.
+      </td>
+    </tr>
+
+  </table>
+</body>

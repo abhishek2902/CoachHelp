@@ -1,0 +1,2479 @@
+
+
+# ===== START: /etc/apache2/sites-available/000-default.conf =====
+
+<VirtualHost *:80>
+	# The ServerName directive sets the request scheme, hostname and port that
+	# the server uses to identify itself. This is used when creating
+	# redirection URLs. In the context of virtual hosts, the ServerName
+	# specifies what hostname must appear in the request's Host: header to
+	# match this virtual host. For the default virtual host (this file) this
+	# value is not decisive as it is used as a last resort host regardless.
+	# However, you must set it for any further virtual host explicitly.
+	#ServerName www.example.com
+
+	ServerAdmin webmaster@localhost
+	DocumentRoot /var/www/html
+
+	# Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
+	# error, crit, alert, emerg.
+	# It is also possible to configure the loglevel for particular
+	# modules, e.g.
+	#LogLevel info ssl:warn
+
+	ErrorLog ${APACHE_LOG_DIR}/error.log
+	CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+	# For most configuration files from conf-available/, which are
+	# enabled or disabled at a global level, it is possible to
+	# include a line for only one particular virtual host. For example the
+	# following line enables the CGI configuration for this host only
+	# after it has been globally disabled with "a2disconf".
+	#Include conf-available/serve-cgi-bin.conf
+</VirtualHost>
+
+# vim: syntax=apache ts=4 sw=4 sts=4 sr noet
+
+# ===== END: /etc/apache2/sites-available/000-default.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/all-in-one.conf =====
+
+
+# ===== END: /etc/apache2/sites-available/all-in-one.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/allrails.website.com.conf =====
+
+<VirtualHost *:80>
+    ServerName supplyapi.shadbox.com
+    ServerAlias www.supplyapi.shadbox.com
+
+    DocumentRoot /var/www/Supply-sultan-backend/public
+    <Directory /var/www/Supply-sultan-backend/public>
+        AllowOverride all
+        Options -MultiViews
+        Require all granted
+        RailsEnv development
+    </Directory>
+
+    # Passenger configuration
+    #LoadModule passenger_module /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20/buildout/apache2/mod_passenger.so
+    #<IfModule mod_passenger.c>
+        #PassengerRoot /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20
+        #PassengerDefaultRuby /usr/local/rvm/gems/ruby-3.0.0/wrappers/ruby
+    #</IfModule>
+
+    ErrorLog ${APACHE_LOG_DIR}/supplyapi_error.log
+    CustomLog ${APACHE_LOG_DIR}/supplyapi_access.log combined
+</VirtualHost>
+
+<VirtualHost *:80>
+    ServerName hr.shadbox.com
+    ServerAlias www.hr.shadbox.com
+
+    DocumentRoot /var/www/hr-shadbox/public
+    <Directory /var/www/hr-shadbox/public>
+        AllowOverride all
+        Options -MultiViews
+        Require all granted
+        RailsEnv production
+    </Directory>
+
+    # Passenger configuration
+    #LoadModule passenger_module /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20/buildout/apache2/mod_passenger.so
+    #<IfModule mod_passenger.c>
+        #PassengerRoot /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20
+        #PassengerDefaultRuby /usr/local/rvm/gems/ruby-3.0.0/wrappers/ruby
+    #</IfModule>
+
+    ErrorLog ${APACHE_LOG_DIR}/hr_error.log
+    CustomLog ${APACHE_LOG_DIR}/hr_access.log combined
+</VirtualHost>
+
+<VirtualHost *:80>
+    ServerName shorturl.shadbox.com
+    ServerAlias www.shorturl.shadbox.com
+
+    DocumentRoot /var/www/Short-url-ror/public
+    <Directory /var/www/Short-url-ror/public>
+        AllowOverride all
+        Options -MultiViews
+        Require all granted
+        RailsEnv development
+    </Directory>
+
+    # Passenger configuration
+    #LoadModule passenger_module /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20/buildout/apache2/mod_passenger.so
+    #<IfModule mod_passenger.c>
+        #PassengerRoot /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20
+        #PassengerDefaultRuby /usr/local/rvm/gems/ruby-3.0.0/wrappers/ruby
+    #</IfModule>
+
+    ErrorLog ${APACHE_LOG_DIR}/shorturl_error.log
+    CustomLog ${APACHE_LOG_DIR}/shorturl_access.log combined
+</VirtualHost>
+
+<VirtualHost *:80>
+    ServerName newapp.shadbox.com
+    ServerAlias www.newapp.shadbox.com
+
+    DocumentRoot /var/www/Capivis-App/public
+    <Directory /var/www/Capivis-App/public>
+        AllowOverride all
+        Options -MultiViews
+        Require all granted
+        RailsEnv development
+    </Directory>
+
+    # Passenger configuration
+   # LoadModule passenger_module /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20/buildout/apache2/mod_passenger.so
+    #<IfModule mod_passenger.c>
+        #PassengerRoot /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20
+        #PassengerDefaultRuby /usr/local/rvm/gems/ruby-3.0.0/wrappers/ruby
+    #</IfModule>
+
+    ErrorLog ${APACHE_LOG_DIR}/newapp_error.log
+    CustomLog ${APACHE_LOG_DIR}/newapp_access.log combined
+</VirtualHost>
+
+<VirtualHost *:80>
+    ServerName nikahnama.shadbox.com
+    ServerAlias www.nikahnama.shadbox.com
+
+    DocumentRoot /var/www/Nikah-nama/public
+    <Directory /var/www/Nikah-nama/public>
+        Allow from all
+        Options -MultiViews
+        Require all granted
+    </Directory>
+
+    # This relaxes Apache security settings, letting your application
+    # run under a less privileged account (the default Passenger user)
+    PassengerUser www-data
+
+    # Environment configuration
+    PassengerAppEnv development
+
+    ErrorLog ${APACHE_LOG_DIR}/nikahnama_error.log
+    CustomLog ${APACHE_LOG_DIR}/nikahnama_access.log combined
+</VirtualHost>
+
+
+
+<VirtualHost *:80>
+    ServerName tasks.shadbox.com
+    ServerAlias www.tasks.shadbox.com
+
+    DocumentRoot /var/www/rails-trello/public
+    <Directory /var/www/rails-trello/public>
+        AllowOverride all
+        Options -MultiViews
+        Require all granted
+        RailsEnv development
+    </Directory>
+
+    # Passenger configuration
+    #LoadModule passenger_module /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20/buildout/apache2/mod_passenger.so
+    #<IfModule mod_passenger.c>
+        #PassengerRoot /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20
+        #PassengerDefaultRuby /usr/local/rvm/gems/ruby-3.0.0/wrappers/ruby
+    #</IfModule>
+
+    ErrorLog ${APACHE_LOG_DIR}/tasks_error.log
+    CustomLog ${APACHE_LOG_DIR}/tasks_access.log combined
+</VirtualHost>
+
+
+
+
+
+
+<VirtualHost *:80>
+    ServerName railstrells.shadbox.com
+    ServerAlias www.railstrells.shadbox.com
+
+    DocumentRoot /var/www/ror-trello-app/public
+    <Directory /var/www/ror-trello-app/public>
+        AllowOverride all
+        Options -MultiViews
+        Require all granted
+        RailsEnv development
+    </Directory>
+
+    # Passenger configuration
+    #LoadModule passenger_module /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20/buildout/apache2/mod_passenger.so
+    #<IfModule mod_passenger.c>
+        #PassengerRoot /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20
+        #PassengerDefaultRuby /usr/local/rvm/gems/ruby-3.0.0/wrappers/ruby
+    #</IfModule>
+
+    ErrorLog ${APACHE_LOG_DIR}/railstrells_error.log
+    CustomLog ${APACHE_LOG_DIR}/railstrells_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/allrails.website.com.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/app.shadbox.com.conf =====
+
+<VirtualHost *:80>
+    ServerName app.shadbox.com
+    ServerAlias www.app.shadbox.com
+
+    # Point to the public directory of your Rails application
+    DocumentRoot /var/www/shadbox-main/public
+
+    <Directory /var/www/shadbox-main/public>
+        AllowOverride all
+        Options -MultiViews
+        Require all granted
+        RailsEnv production
+    </Directory>
+
+# Passenger configuration
+    LoadModule passenger_module /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20/buildout/apache2/mod_passenger.so
+    <IfModule mod_passenger.c>
+        PassengerRoot /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20
+        PassengerDefaultRuby /usr/local/rvm/gems/ruby-3.0.0/wrappers/ruby
+    </IfModule>
+
+
+    <IfModule mod_headers.c>
+        RequestHeader set LimitRequestFieldSize 16384
+        LimitRequestLine 8190
+    </IfModule>
+
+    ErrorLog ${APACHE_LOG_DIR}/app_error.log
+    CustomLog ${APACHE_LOG_DIR}/app_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/app.shadbox.com.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/appstaging.talenttest.co.conf =====
+
+
+<VirtualHost *:80>
+    ServerName appstaging.talenttest.co
+    ServerAlias www.appstaging.talenttest.co
+
+    DocumentRoot /var/www/TestPortal-Backend/public
+    <Directory /var/www/TestPortal-Backend/public>
+        AllowOverride all
+        Options -MultiViews
+        Require all granted
+        RailsEnv production
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/test_portal_error.log
+    CustomLog ${APACHE_LOG_DIR}/test_portal_access.log combined
+</VirtualHost>
+
+# ===== END: /etc/apache2/sites-available/appstaging.talenttest.co.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/chatwoot-customize.shadbox.com.conf =====
+
+<VirtualHost *:80>
+    ServerName chatwoot-customize.shadbox.com
+    ServerAlias www.chatwoot-customize.shadbox.com
+
+    DocumentRoot /
+# ===== START: /etc/apache2/sites-available/000-default.conf =====
+
+<VirtualHost *:80>
+    # The ServerName directive sets the request scheme, hostname and port that
+    # the server uses to identify itself. This is used when creating
+    # redirection URLs. In the context of virtual hosts, the ServerName
+    # specifies what hostname must appear in the request's Host: header to
+    # match this virtual host. For the default virtual host (this file) this
+    # value is not decisive as it is used as a last resort host regardless.
+    # However, you must set it for any further virtual host explicitly.
+    #ServerName www.example.com
+
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www/html
+
+    # Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
+    # error, crit, alert, emerg.
+    # It is also possible to configure the loglevel for particular
+    # modules, e.g.
+    #LogLevel info ssl:warn
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+    # For most configuration files from conf-available/, which are
+    # enabled or disabled at a global level, it is possible to
+    # include a line for only one particular virtual host. For example the
+    # following line enables the CGI configuration for this host only
+    # after it has been globally disabled with "a2disconf".
+    #Include conf-available/serve-cgi-bin.conf
+</VirtualHost>
+
+# vim: syntax=apache ts=4 sw=4 sts=4 sr noet
+
+# ===== END: /etc/apache2/sites-available/000-default.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/all-in-one.conf =====
+
+
+# ===== END: /etc/apache2/sites-available/all-in-one.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/allrails.website.com.conf =====
+
+<VirtualHost *:80>
+   ServerName supplyapi.shadbox.com
+   ServerAlias www.supplyapi.shadbox.com
+
+   DocumentRoot /var/www/Supply-sultan-backend/public
+   <Directory /var/www/Supply-sultan-backend/public>
+       AllowOverride all
+       Options -MultiViews
+       Require all granted
+       RailsEnv development
+   </Directory>
+
+   # Passenger configuration
+   #LoadModule passenger_module /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20/buildout/apache2/mod_passenger.so
+   #<IfModule mod_passenger.c>
+       #PassengerRoot /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20
+       #PassengerDefaultRuby /usr/local/rvm/gems/ruby-3.0.0/wrappers/ruby
+   #</IfModule>
+
+   ErrorLog ${APACHE_LOG_DIR}/supplyapi_error.log
+   CustomLog ${APACHE_LOG_DIR}/supplyapi_access.log combined
+</VirtualHost>
+
+<VirtualHost *:80>
+   ServerName hr.shadbox.com
+   ServerAlias www.hr.shadbox.com
+
+   DocumentRoot /var/www/hr-shadbox/public
+   <Directory /var/www/hr-shadbox/public>
+       AllowOverride all
+       Options -MultiViews
+       Require all granted
+       RailsEnv production
+   </Directory>
+
+   # Passenger configuration
+   #LoadModule passenger_module /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20/buildout/apache2/mod_passenger.so
+   #<IfModule mod_passenger.c>
+       #PassengerRoot /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20
+       #PassengerDefaultRuby /usr/local/rvm/gems/ruby-3.0.0/wrappers/ruby
+   #</IfModule>
+
+   ErrorLog ${APACHE_LOG_DIR}/hr_error.log
+   CustomLog ${APACHE_LOG_DIR}/hr_access.log combined
+</VirtualHost>
+
+<VirtualHost *:80>
+   ServerName shorturl.shadbox.com
+   ServerAlias www.shorturl.shadbox.com
+
+   DocumentRoot /var/www/Short-url-ror/public
+   <Directory /var/www/Short-url-ror/public>
+       AllowOverride all
+       Options -MultiViews
+       Require all granted
+       RailsEnv development
+   </Directory>
+
+   # Passenger configuration
+   #LoadModule passenger_module /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20/buildout/apache2/mod_passenger.so
+   #<IfModule mod_passenger.c>
+       #PassengerRoot /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20
+       #PassengerDefaultRuby /usr/local/rvm/gems/ruby-3.0.0/wrappers/ruby
+   #</IfModule>
+
+   ErrorLog ${APACHE_LOG_DIR}/shorturl_error.log
+   CustomLog ${APACHE_LOG_DIR}/shorturl_access.log combined
+</VirtualHost>
+
+<VirtualHost *:80>
+   ServerName newapp.shadbox.com
+   ServerAlias www.newapp.shadbox.com
+
+   DocumentRoot /var/www/Capivis-App/public
+   <Directory /var/www/Capivis-App/public>
+       AllowOverride all
+       Options -MultiViews
+       Require all granted
+       RailsEnv development
+   </Directory>
+
+   # Passenger configuration
+  # LoadModule passenger_module /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20/buildout/apache2/mod_passenger.so
+   #<IfModule mod_passenger.c>
+       #PassengerRoot /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20
+       #PassengerDefaultRuby /usr/local/rvm/gems/ruby-3.0.0/wrappers/ruby
+   #</IfModule>
+
+   ErrorLog ${APACHE_LOG_DIR}/newapp_error.log
+   CustomLog ${APACHE_LOG_DIR}/newapp_access.log combined
+</VirtualHost>
+
+<VirtualHost *:80>
+   ServerName nikahnama.shadbox.com
+   ServerAlias www.nikahnama.shadbox.com
+
+   DocumentRoot /var/www/Nikah-nama/public
+   <Directory /var/www/Nikah-nama/public>
+       Allow from all
+       Options -MultiViews
+       Require all granted
+   </Directory>
+
+   # This relaxes Apache security settings, letting your application
+   # run under a less privileged account (the default Passenger user)
+   PassengerUser www-data
+
+   # Environment configuration
+   PassengerAppEnv development
+
+   ErrorLog ${APACHE_LOG_DIR}/nikahnama_error.log
+   CustomLog ${APACHE_LOG_DIR}/nikahnama_access.log combined
+</VirtualHost>
+
+
+
+<VirtualHost *:80>
+   ServerName tasks.shadbox.com
+   ServerAlias www.tasks.shadbox.com
+
+   DocumentRoot /var/www/rails-trello/public
+   <Directory /var/www/rails-trello/public>
+       AllowOverride all
+       Options -MultiViews
+       Require all granted
+       RailsEnv development
+   </Directory>
+
+   # Passenger configuration
+   #LoadModule passenger_module /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20/buildout/apache2/mod_passenger.so
+   #<IfModule mod_passenger.c>
+       #PassengerRoot /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20
+       #PassengerDefaultRuby /usr/local/rvm/gems/ruby-3.0.0/wrappers/ruby
+   #</IfModule>
+
+   ErrorLog ${APACHE_LOG_DIR}/tasks_error.log
+   CustomLog ${APACHE_LOG_DIR}/tasks_access.log combined
+</VirtualHost>
+
+
+
+
+
+
+<VirtualHost *:80>
+   ServerName railstrells.shadbox.com
+   ServerAlias www.railstrells.shadbox.com
+
+   DocumentRoot /var/www/ror-trello-app/public
+   <Directory /var/www/ror-trello-app/public>
+       AllowOverride all
+       Options -MultiViews
+       Require all granted
+       RailsEnv development
+   </Directory>
+
+   # Passenger configuration
+   #LoadModule passenger_module /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20/buildout/apache2/mod_passenger.so
+   #<IfModule mod_passenger.c>
+       #PassengerRoot /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20
+       #PassengerDefaultRuby /usr/local/rvm/gems/ruby-3.0.0/wrappers/ruby
+   #</IfModule>
+
+   ErrorLog ${APACHE_LOG_DIR}/railstrells_error.log
+   CustomLog ${APACHE_LOG_DIR}/railstrells_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/allrails.website.com.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/app.shadbox.com.conf =====
+
+<VirtualHost *:80>
+   ServerName app.shadbox.com
+   ServerAlias www.app.shadbox.com
+
+   # Point to the public directory of your Rails application
+   DocumentRoot /var/www/shadbox-main/public
+
+   <Directory /var/www/shadbox-main/public>
+       AllowOverride all
+       Options -MultiViews
+       Require all granted
+       RailsEnv production
+   </Directory>
+
+# Passenger configuration
+   LoadModule passenger_module /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20/buildout/apache2/mod_passenger.so
+   <IfModule mod_passenger.c>
+       PassengerRoot /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20
+       PassengerDefaultRuby /usr/local/rvm/gems/ruby-3.0.0/wrappers/ruby
+   </IfModule>
+
+
+   <IfModule mod_headers.c>
+       RequestHeader set LimitRequestFieldSize 16384
+       LimitRequestLine 8190
+   </IfModule>
+
+   ErrorLog ${APACHE_LOG_DIR}/app_error.log
+   CustomLog ${APACHE_LOG_DIR}/app_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/app.shadbox.com.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/appstaging.talenttest.co.conf =====
+
+
+<VirtualHost *:80>
+   ServerName appstaging.talenttest.co
+   ServerAlias www.appstaging.talenttest.co
+
+   DocumentRoot /var/www/TestPortal-Backend/public
+   <Directory /var/www/TestPortal-Backend/public>
+       AllowOverride all
+       Options -MultiViews
+       Require all granted
+       RailsEnv production
+   </Directory>
+
+   ErrorLog ${APACHE_LOG_DIR}/test_portal_error.log
+   CustomLog ${APACHE_LOG_DIR}/test_portal_access.log combined
+</VirtualHost>
+
+# ===== END: /etc/apache2/sites-available/appstaging.talenttest.co.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/chatwoot-customize.shadbox.com.conf =====
+
+<VirtualHost *:80>
+   ServerName chatwoot-customize.shadbox.com
+   ServerAlias www.chatwoot-customize.shadbox.com
+
+   DocumentRoot /var/www/Chat-Wood_Application/public
+   <Directory /var/www/Chat-Wood_Application/public>
+       AllowOverride all
+       Options -MultiViews
+       Require all granted
+       RailsEnv production
+   </Directory>
+
+   ErrorLog ${APACHE_LOG_DIR}/chatwoot_error.log
+   CustomLog ${APACHE_LOG_DIR}/chatwoot_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/chatwoot-customize.shadbox.com.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/crm.shadbox.com.conf =====
+
+<VirtualHost *:80>
+ ServerName   appstaging.talenttest.co
+ ServerAlias www.appstaging.talenttest.co
+
+ # Point to your app’s public folder
+ DocumentRoot  /var/www/TestPortal-Backend/public
+
+ # Tell Passenger where Ruby is and which env to use
+ PassengerRuby    /usr/local/rvm/wrappers/ruby-3.0.0/ruby
+ PassengerAppEnv production
+ PassengerEnabled on
+ PassengerPreStart http://appstaging.talenttest.co/
+ 
+ <Directory /var/www/TestPortal-Backend/public>
+   # allow .htaccess, disable MultiViews, grant access
+   AllowOverride  all
+   Options        -MultiViews
+   Require         all granted
+ </Directory>
+
+ ErrorLog  ${APACHE_LOG_DIR}/TestPortal-Backend_error.log
+ CustomLog ${APACHE_LOG_DIR}/TestPortal-Backend_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/crm.shadbox.com.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/default-ssl.conf =====
+
+<IfModule mod_ssl.c>
+    <VirtualHost _default_:443>
+        ServerAdmin webmaster@localhost
+
+        DocumentRoot /var/www/html
+
+        # Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
+        # error, crit, alert, emerg.
+        # It is also possible to configure the loglevel for particular
+        # modules, e.g.
+        #LogLevel info ssl:warn
+
+        ErrorLog ${APACHE_LOG_DIR}/error.log
+        CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+        # For most configuration files from conf-available/, which are
+        # enabled or disabled at a global level, it is possible to
+        # include a line for only one particular virtual host. For example the
+        # following line enables the CGI configuration for this host only
+        # after it has been globally disabled with "a2disconf".
+        #Include conf-available/serve-cgi-bin.conf
+
+        #   SSL Engine Switch:
+        #   Enable/Disable SSL for this virtual host.
+        SSLEngine on
+
+        #   A self-signed (snakeoil) certificate can be created by installing
+        #   the ssl-cert package. See
+        #   /usr/share/doc/apache2/README.Debian.gz for more info.
+        #   If both key and certificate are stored in the same file, only the
+        #   SSLCertificateFile directive is needed.
+        SSLCertificateFile    /etc/ssl/certs/ssl-cert-snakeoil.pem
+        SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
+
+        #   Server Certificate Chain:
+        #   Point SSLCertificateChainFile at a file containing the
+        #   concatenation of PEM encoded CA certificates which form the
+        #   certificate chain for the server certificate. Alternatively
+        #   the referenced file can be the same as SSLCertificateFile
+        #   when the CA certificates are directly appended to the server
+        #   certificate for convinience.
+        #SSLCertificateChainFile /etc/apache2/ssl.crt/server-ca.crt
+
+        #   Certificate Authority (CA):
+        #   Set the CA certificate verification path where to find CA
+        #   certificates for client authentication or alternatively one
+        #   huge file containing all of them (file must be PEM encoded)
+        #   Note: Inside SSLCACertificatePath you need hash symlinks
+        #         to point to the certificate files. Use the provided
+        #         Makefile to update the hash symlinks after changes.
+        #SSLCACertificatePath /etc/ssl/certs/
+        #SSLCACertificateFile /etc/apache2/ssl.crt/ca-bundle.crt
+
+        #   Certificate Revocation Lists (CRL):
+        #   Set the CA revocation path where to find CA CRLs for client
+        #   authentication or alternatively one huge file containing all
+        #   of them (file must be PEM encoded)
+        #   Note: Inside SSLCARevocationPath you need hash symlinks
+        #         to point to the certificate files. Use the provided
+        #         Makefile to update the hash symlinks after changes.
+        #SSLCARevocationPath /etc/apache2/ssl.crl/
+        #SSLCARevocationFile /etc/apache2/ssl.crl/ca-bundle.crl
+
+        #   Client Authentication (Type):
+        #   Client certificate verification type and depth.  Types are
+        #   none, optional, require and optional_no_ca.  Depth is a
+        #   number which specifies how deeply to verify the certificate
+        #   issuer chain before deciding the certificate is not valid.
+        #SSLVerifyClient require
+        #SSLVerifyDepth  10
+
+        #   SSL Engine Options:
+        #   Set various options for the SSL engine.
+        #   o FakeBasicAuth:
+        #     Translate the client X.509 into a Basic Authorisation.  This means that
+        #     the standard Auth/DBMAuth methods can be used for access control.  The
+        #     user name is the `one line' version of the client's X.509 certificate.
+        #     Note that no password is obtained from the user. Every entry in the user
+        #     file needs this password: `xxj31ZMTZzkVA'.
+        #   o ExportCertData:
+        #     This exports two additional environment variables: SSL_CLIENT_CERT and
+        #     SSL_SERVER_CERT. These contain the PEM-encoded certificates of the
+        #     server (always existing) and the client (only existing when client
+        #     authentication is used). This can be used to import the certificates
+        #     into CGI scripts.
+        #   o StdEnvVars:
+        #     This exports the standard SSL/TLS related `SSL_*' environment variables.
+        #     Per default this exportation is switched off for performance reasons,
+        #     because the extraction step is an expensive operation and is usually
+        #     useless for serving static content. So one usually enables the
+        #     exportation for CGI and SSI requests only.
+        #   o OptRenegotiate:
+        #     This enables optimized SSL connection renegotiation handling when SSL
+        #     directives are used in per-directory context.
+        #SSLOptions +FakeBasicAuth +ExportCertData +StrictRequire
+        <FilesMatch "\.(cgi|shtml|phtml|php)$">
+                SSLOptions +StdEnvVars
+        </FilesMatch>
+        <Directory /usr/lib/cgi-bin>
+                SSLOptions +StdEnvVars
+        </Directory>
+
+        #   SSL Protocol Adjustments:
+        #   The safe and default but still SSL/TLS standard compliant shutdown
+        #   approach is that mod_ssl sends the close notify alert but doesn't wait for
+        #   the close notify alert from client. When you need a different shutdown
+        #   approach you can use one of the following variables:
+        #   o ssl-unclean-shutdown:
+        #     This forces an unclean shutdown when the connection is closed, i.e. no
+        #     SSL close notify alert is send or allowed to received.  This violates
+        #     the SSL/TLS standard but is needed for some brain-dead browsers. Use
+        #     this when you receive I/O errors because of the standard approach where
+        #     mod_ssl sends the close notify alert.
+        #   o ssl-accurate-shutdown:
+        #     This forces an accurate shutdown when the connection is closed, i.e. a
+        #     SSL close notify alert is send and mod_ssl waits for the close notify
+        #     alert of the client. This is 100% SSL/TLS standard compliant, but in
+        #     practice often causes hanging connections with brain-dead browsers. Use
+        #     this only for browsers where you know that their SSL implementation
+        #     works correctly.
+        #   Notice: Most problems of broken clients are also related to the HTTP
+        #   keep-alive facility, so you usually additionally want to disable
+        #   keep-alive for those clients, too. Use variable "nokeepalive" for this.
+        #   Similarly, one has to force some clients to use HTTP/1.0 to workaround
+        #   their broken HTTP/1.1 implementation. Use variables "downgrade-1.0" and
+        #   "force-response-1.0" for this.
+        # BrowserMatch "MSIE [2-6]" \
+        #        nokeepalive ssl-unclean-shutdown \
+        #        downgrade-1.0 force-response-1.0
+
+    </VirtualHost>
+</IfModule>
+
+# vim: syntax=apache ts=4 sw=4 sts=4 sr noet
+
+# ===== END: /etc/apache2/sites-available/default-ssl.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/doctor-appointment.shadbox.com.conf =====
+
+<VirtualHost *:80>
+   ServerName doctor-appointment.shadbox.com
+   ServerAlias www.doctor-appointment.shadbox.com
+
+   DocumentRoot /var/www/doctor-appointment/public
+   <Directory /var/www/doctor-appointment/public>
+       AllowOverride all
+       Options -MultiViews
+       Require all granted
+       RailsEnv production
+   </Directory>
+
+   ErrorLog ${APACHE_LOG_DIR}/doctor_appointment_error.log
+   CustomLog ${APACHE_LOG_DIR}/doctor_appointment_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/doctor-appointment.shadbox.com.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/faq-testportal.shadbox.com.conf =====
+
+<VirtualHost *:80>
+   ServerName faq-testportal.shadbox.com
+
+   ProxyPreserveHost On
+   ProxyRequests Off
+
+   ProxyPass / http://localhost:4000/
+   ProxyPassReverse / http://localhost:4000/
+
+   # Pass client IP info to backend app
+   RequestHeader set X-Real-IP %{REMOTE_ADDR}e
+   RequestHeader set X-Forwarded-For %{REMOTE_ADDR}e
+   RequestHeader set X-Forwarded-Proto expr=%{REQUEST_SCHEME}
+
+   # Allow proxy for all
+   <Proxy *>
+       Require all granted
+   </Proxy>
+
+   ErrorLog ${APACHE_LOG_DIR}/faq-error.log
+   CustomLog ${APACHE_LOG_DIR}/faq-access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/faq-testportal.shadbox.com.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/gitweb.conf =====
+
+
+<VirtualHost *:80>
+   ServerName gitlab.shadbox.com
+
+   ProxyPreserveHost On
+   ProxyPass / http://127.0.0.1:8080/
+   ProxyPassReverse / http://127.0.0.1:8080/
+   
+   <Proxy *>
+       Order allow,deny
+       Allow from all
+   </Proxy>
+
+   ErrorLog ${APACHE_LOG_DIR}/gitlab_error.log
+   CustomLog ${APACHE_LOG_DIR}/gitlab_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/gitweb.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/lab.shadbox.com.conf =====
+
+
+<VirtualHost *:80>
+   ServerName lab.shadbox.com
+   ServerAlias www.lab.shadbox.com
+
+   DocumentRoot /var/www/TheLabCare/public
+   <Directory /var/www/TheLabCare/public>
+       AllowOverride all
+       Options -MultiViews
+       Require all granted
+       RailsEnv production
+   </Directory>
+
+   ErrorLog ${APACHE_LOG_DIR}/the_lab_error.log
+   CustomLog ${APACHE_LOG_DIR}/the_lab_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/lab.shadbox.com.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/lawnandhall.shadbox.com.conf =====
+
+<VirtualHost *:80>
+   ServerName lawnandhall.com
+   ServerAlias *.lawnandhall.com
+
+   DocumentRoot /var/www/lawnandhall/public
+   <Directory /var/www/lawnandhall/public>
+       AllowOverride all
+       Options -MultiViews
+       Require all granted
+       RailsEnv development
+       RailsEnv production
+   </Directory>
+
+   ErrorLog ${APACHE_LOG_DIR}/lawnandhall_dev_error.log
+   CustomLog ${APACHE_LOG_DIR}/lawnandhall_dev_access.log combined
+
+   # Enable HTTP/2
+   Protocols h2 http/1.1
+
+   # Enable Compression
+   <IfModule mod_deflate.c>
+       AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript
+   </IfModule>
+
+   # Enable Caching
+   <IfModule mod_expires.c>
+       ExpiresActive On
+       ExpiresByType image/jpg "access plus 1 month"
+       ExpiresByType image/jpeg "access plus 1 month"
+       ExpiresByType image/gif "access plus 1 month"
+       ExpiresByType image/png "access plus 1 month"
+       ExpiresByType text/css "access plus 1 month"
+       ExpiresByType application/javascript "access plus 1 month"
+   </IfModule>
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/lawnandhall.shadbox.com.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/music_band_api.conf =====
+
+<VirtualHost *:80>
+   ServerName video-call.shadbox.com
+   ServerAlias video-call.shadbox.com
+
+   DocumentRoot /var/www/music_band_api/public
+   <Directory /var/www/music_band_api/public>
+       AllowOverride all
+       Options -MultiViews
+       Require all granted
+       RailsEnv development
+   </Directory>
+
+   ErrorLog ${APACHE_LOG_DIR}/video-call.shadbox_error.log
+   CustomLog ${APACHE_LOG_DIR}/video-call.shadbox_access.log combined
+</VirtualHost>
+
+# ===== END: /etc/apache2/sites-available/music_band_api.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/music_band_frontend.conf =====
+
+#frontend
+<VirtualHost *:80>
+   ServerName 203.161.58.56
+   ServerAlias 203.161.58.56
+
+   DocumentRoot /var/www/React-Rails_Task/build
+   DirectoryIndex index.html
+
+   <Directory /var/www/React-Rails_Task/build>
+       Options Indexes FollowSymLinks
+       AllowOverride All
+       Require all granted
+   </Directory>
+
+   # Handle requests to the root
+   <Location />
+       RewriteEngine On
+       RewriteCond %{REQUEST_FILENAME} !-f
+       RewriteCond %{REQUEST_FILENAME} !-d
+       RewriteRule ^ index.html [L]
+   </Location>
+
+   # Proxy configuration for /api/
+   <Location /api/>
+       ProxyPass https://video-call.shadbox.com/
+       ProxyPassReverse  https://video-call.shadbox.com/
+       ProxyPreserveHost On
+       RequestHeader set X-Real-IP %{REMOTE_ADDR}s
+       RequestHeader set X-Forwarded-For %{REMOTE_ADDR}s
+       RequestHeader set X-Forwarded-Proto %{SCHEME}s
+   </Location>
+</VirtualHost>
+
+# ===== END: /etc/apache2/sites-available/music_band_frontend.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/my_store.conf =====
+
+<VirtualHost *:80>
+   ServerName kamran.shadbox.com
+   ServerAlias www.kamran.shadbox.com
+
+   DocumentRoot /var/www/mechanicalservice/public
+
+   <Directory /var/www/mechanicalservice/public>
+       AllowOverride all
+       Options -MultiViews
+       Require all granted
+       RailsEnv production
+   </Directory>
+
+   # Passenger Configuration
+   LoadModule passenger_module /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20/buildout/apache2/mod_passenger.so
+   <IfModule mod_passenger.c>
+       PassengerRoot /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20
+       PassengerDefaultRuby /usr/local/rvm/gems/ruby-3.0.0/wrappers/ruby
+   </IfModule>
+
+   # Error and Access Logs
+   ErrorLog ${APACHE_LOG_DIR}/mechanicalservice_error.log
+   CustomLog ${APACHE_LOG_DIR}/mechanicalservice_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/my_store.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/newapp.shadbox.com.conf =====
+
+<VirtualHost *:80>
+   ServerName newapp.shadbox.com
+   ServerAlias www.newapp.shadbox.com
+
+   DocumentRoot /var/www/Capivis-App/public
+   <Directory /var/www/Capivis-App/public>
+       AllowOverride all
+       Options -MultiViews
+       Require all granted
+       RailsEnv development
+   </Directory>
+
+   ErrorLog ${APACHE_LOG_DIR}/newapp_error.log
+   CustomLog ${APACHE_LOG_DIR}/newapp_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/newapp.shadbox.com.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/nikahnama.shadbox.com.conf =====
+
+<VirtualHost *:80>
+   ServerName nikahnama.shadbox.com
+   ServerAlias www.nikahnama.shadbox.com
+
+   DocumentRoot /var/www/Nikah-nama/public
+   <Directory /var/www/Nikah-nama/public>
+       Allow from all
+       Options -MultiViews
+       Require all granted
+   </Directory>
+
+   # This relaxes Apache security settings, letting your application
+   # run under a less privileged account (the default Passenger user)
+   PassengerUser www-data
+
+   # Environment configuration
+   PassengerAppEnv development
+
+   ErrorLog ${APACHE_LOG_DIR}/nikahnama_error.log
+   CustomLog ${APACHE_LOG_DIR}/nikahnama_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/nikahnama.shadbox.com.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/rails_app_8080.conf =====
+
+<VirtualHost 203.161.58.56:8080>
+   ServerName 203.161.58.56
+
+   ProxyPass / http://127.0.0.1:3001/
+   ProxyPassReverse / http://127.0.0.1:3001/
+
+   ErrorLog ${APACHE_LOG_DIR}/rails_app_8080_error.log
+   CustomLog ${APACHE_LOG_DIR}/rails_app_8080_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/rails_app_8080.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/shadbox.com.conf =====
+
+<VirtualHost *:80>
+   ServerName fe.shadbox.com
+   ServerAlias www.fe.shadbox.com
+
+   DocumentRoot /var/www/Upwork-Frontend/dist
+   DirectoryIndex index.html
+
+   <Directory /var/www/Upwork-Frontend/dist>
+       Options Indexes FollowSymLinks
+       AllowOverride All
+       Require all granted
+   </Directory>
+
+   # Handle requests to the root
+   <Location />
+       RewriteEngine On
+       RewriteCond %{REQUEST_FILENAME} !-f
+       RewriteCond %{REQUEST_FILENAME} !-d
+       RewriteRule ^ /index.html [L]
+   </Location>
+
+   # Proxy configuration for /api/
+   <Location /api/>
+       ProxyPass https://app.shadbox.com
+       ProxyPassReverse https://app.shadbox.com
+       ProxyPreserveHost On
+       RequestHeader set X-Real-IP %{REMOTE_ADDR}s
+       RequestHeader set X-Forwarded-For %{REMOTE_ADDR}s
+       RequestHeader set X-Forwarded-Proto %{SCHEME}s
+   </Location>
+</VirtualHost>
+
+<VirtualHost *:80>
+   ServerName shadbox.com
+   ServerAlias www.shadbox.com
+
+   DocumentRoot /var/www/Shadbox-FE/dist
+   DirectoryIndex index.html
+
+   <Directory /var/www/Shadbox-FE/dist>
+       Options Indexes FollowSymLinks
+       AllowOverride All
+       Require all granted
+   </Directory>
+
+   # Handle requests to the root
+   <Location />
+       RewriteEngine On
+       RewriteCond %{REQUEST_FILENAME} !-f
+       RewriteCond %{REQUEST_FILENAME} !-d
+       RewriteRule ^ /index.html [L]
+   </Location>
+
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/shadbox.com.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/shorturl.shadbox.com.conf =====
+
+<VirtualHost *:80>
+   ServerName shorturl.shadbox.com
+   ServerAlias www.shorturl.shadbox.com
+
+   DocumentRoot /var/www/Short-url-ror/public
+   <Directory /var/www/Short-url-ror/public>
+       AllowOverride all
+       Options -MultiViews
+       Require all granted
+       RailsEnv development
+   </Directory>
+
+   ErrorLog ${APACHE_LOG_DIR}/shorturl_error.log
+   CustomLog ${APACHE_LOG_DIR}/shorturl_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/shorturl.shadbox.com.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/spree.conf =====
+
+<VirtualHost *:80>
+   ServerName Spree.shadbox.com
+   ServerAlias www.Spree.shadbox.com
+
+   DocumentRoot /var/www/Spree-app/public
+   <Directory /var/www/Spree-app/public>
+       Allow from all
+       Options -MultiViews
+       Require all granted
+   </Directory>
+
+   # This relaxes Apache security settings, letting your application
+   # run under a less privileged account (the default Passenger user)
+   PassengerUser www-data
+
+   # Environment configuration
+   PassengerAppEnv development
+
+   ErrorLog ${APACHE_LOG_DIR}/Spree-app_error.log
+   CustomLog ${APACHE_LOG_DIR}/Spree-app_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/spree.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/stockmanagement.conf =====
+
+<VirtualHost *:80>
+   ServerName stockmanagement.shadbox.com
+   ServerAlias www.stockmanagement.shadbox.com
+
+   DocumentRoot /var/www/stockmanagement/public
+   <Directory /var/www/stockmanagement/public>
+       AllowOverride all
+       Options -MultiViews
+       Require all granted
+       SetEnv RAILS_ENV production
+   </Directory>
+
+   ErrorLog ${APACHE_LOG_DIR}/stockmanagement_error.log
+   CustomLog ${APACHE_LOG_DIR}/stockmanagement_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/stockmanagement.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/supplyapi.shadbox.com.conf =====
+
+<VirtualHost *:80>
+   ServerName supplyapi.shadbox.com
+   ServerAlias www.supplyapi.shadbox.com
+
+   DocumentRoot /var/www/Supply-sultan-backend/public
+   <Directory /var/www/Supply-sultan-backend/public>
+       AllowOverride all
+       Options -MultiViews
+       Require all granted
+       RailsEnv development
+   </Directory>
+
+   ErrorLog ${APACHE_LOG_DIR}/supplyapi_error.log
+   CustomLog ${APACHE_LOG_DIR}/supplyapi_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/supplyapi.shadbox.com.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/testportal.frontend.com.conf =====
+
+<VirtualHost *:80>
+   ServerName staging.talenttest.co
+   ServerAlias staging.talenttest.co
+
+   DocumentRoot /var/www/TestPortal-Frontend/frontend/dist
+   DirectoryIndex index.html
+
+   <Directory /var/www/TestPortal-Frontend/frontend/dist>
+       Options Indexes FollowSymLinks
+       AllowOverride All
+       Require all granted
+   </Directory>
+
+   # Handle requests to the root
+   <Location />
+       RewriteEngine On
+       RewriteCond %{REQUEST_FILENAME} !-f
+       RewriteCond %{REQUEST_FILENAME} !-d
+       RewriteRule ^ /index.html [L]
+   </Location>
+
+   # Proxy configuration for /api/
+   <Location /api/>
+       ProxyPass https://staging.talenttest.co
+       ProxyPassReverse https://staging.talenttest.co
+       ProxyPreserveHost On
+       RequestHeader set X-Real-IP %{REMOTE_ADDR}s
+       RequestHeader set X-Forwarded-For %{REMOTE_ADDR}s
+       RequestHeader set X-Forwarded-Proto %{SCHEME}s
+   </Location>
+</VirtualHost>
+
+
+
+#<VirtualHost *:80>
+#   ServerName staging.talenttest.co
+ #  ServerAlias staging.talenttest.co
+
+  # DocumentRoot /var/www/TestPortal-Frontend/frontend/dist
+  # DirectoryIndex index.html
+
+  # <Directory /var/www/TestPortal-Frontend/frontend/dist>
+  #     Options Indexes FollowSymLinks
+  #     AllowOverride All
+  #     Require all granted
+  # </Directory>
+
+   # Handle requests to the root
+  # <Location />
+   #    RewriteEngine On
+  #     RewriteCond %{REQUEST_FILENAME} !-f
+  #     RewriteCond %{REQUEST_FILENAME} !-d
+  #     RewriteRule ^ /index.html [L]
+  # </Location>
+
+   # Proxy configuration for /api/
+  # <Location /api/>
+ #      ProxyPass https://staging.talenttest.co
+#       ProxyPassReverse https://staging.talenttest.co
+#       ProxyPreserveHost On
+#       RequestHeader set X-Real-IP %{REMOTE_ADDR}s
+#       RequestHeader set X-Forwarded-For %{REMOTE_ADDR}s
+#        RequestHeader set X-Forwarded-Proto %{SCHEME}s
+#    </Location>
+#</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/testportal.frontend.com.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/thelab.shadbox.com.conf =====
+
+<VirtualHost *:80>
+   ServerName thelab.shadbox.com
+   ServerAlias www.thelab.shadbox.com
+
+   DocumentRoot /var/www/TheLab/public
+   PassengerEnabled on
+   PassengerAppRoot /var/www/TheLab
+   PassengerRuby /usr/local/rvm/rubies/ruby-3.2.2/wrappers/ruby
+   <Directory /var/www/TheLab/public>
+       AllowOverride all
+       Options -MultiViews
+       Require all granted
+       RailsEnv production
+   </Directory>
+
+   ErrorLog ${APACHE_LOG_DIR}/the_lab_care_error.log
+   CustomLog ${APACHE_LOG_DIR}/the_lab_care_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/thelab.shadbox.com.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/turfly.co.conf =====
+
+<VirtualHost *:80>
+   ServerName turfly.co
+   ServerAlias www.turfly.co
+
+   DocumentRoot /var/www/turfly/public
+   <Directory /var/www/turfly/public>
+       AllowOverride all
+       Options -MultiViews
+       Require all granted
+       RailsEnv production
+   </Directory>
+
+   ErrorLog ${APACHE_LOG_DIR}/turfly_error.log
+   CustomLog ${APACHE_LOG_DIR}/turfly_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/turfly.co.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/turfly.shadbox.com.conf =====
+
+<VirtualHost *:80>
+   ServerName turfly.shadbox.com
+   ServerAlias www.turfly.shadbox.com
+
+   DocumentRoot /var/www/turfly/public
+   <Directory /var/www/turfly/public>
+       AllowOverride all
+       Options -MultiViews
+       Require all granted
+       RailsEnv production
+   </Directory>
+
+   ErrorLog ${APACHE_LOG_DIR}/turfly_error.log
+   CustomLog ${APACHE_LOG_DIR}/turfly_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/turfly.shadbox.com.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/upwork-backend.conf =====
+
+
+# ===== END: /etc/apache2/sites-available/upwork-backend.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/upwork_frontend.conf =====
+
+<VirtualHost *:80>
+   ServerName capavis.shadbox.com
+   ServerAlias capavis.shadbox.com
+
+   DocumentRoot /var/www/ORCA-FE/dist
+   DirectoryIndex index.html
+
+   <Directory /var/www/ORCA-FE/dist>
+       Options Indexes FollowSymLinks
+       AllowOverride All
+       Require all granted
+   </Directory>
+
+   # Handle requests to the root
+   <Location />
+       RewriteEngine On
+       RewriteCond %{REQUEST_FILENAME} !-f
+       RewriteCond %{REQUEST_FILENAME} !-d
+       RewriteRule ^ /index.html [L]
+   </Location>
+
+   # Proxy configuration for /api/
+   <Location /api/>
+       ProxyPass https://orca.shadbox.com
+       ProxyPassReverse https://orca.shadbox.com
+       ProxyPreserveHost On
+       RequestHeader set X-Real-IP %{REMOTE_ADDR}s
+       RequestHeader set X-Forwarded-For %{REMOTE_ADDR}s
+       RequestHeader set X-Forwarded-Proto %{SCHEME}s
+   </Location>
+</VirtualHost>
+
+
+
+# ===== END: /etc/apache2/sites-available/upwork_frontend.conf =====
+
+
+
+
+# ===== END: /etc/apache2/sites-available/user_management.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/user_management_tasks.conf =====
+
+
+
+<VirtualHost *:4001>
+   ServerName 203.161.58.56
+   ServerAlias 203.161.58.56
+
+   ProxyPass / http://localhost:4000/
+   ProxyPassReverse / http://localhost:4000/
+
+   ErrorLog ${APACHE_LOG_DIR}/203.161.58.56_error.log
+   CustomLog ${APACHE_LOG_DIR}/203.161.58.56_access.log combined
+</VirtualHost>
+
+# ===== END: /etc/apache2/sites-available/user_management_tasks.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/us.shadbox.com.conf =====
+
+<VirtualHost *:80>
+   ServerName shadbox.us
+   ServerAlias www.shadbox.us
+
+   # Point to the public directory of your Rails application
+   DocumentRoot /var/www/Shadbox-Us-Frontend/dist
+
+   <Directory /var/www/Shadbox-Us-Frontend/dist>
+       AllowOverride all
+       Options -MultiViews
+       Require all granted
+       RailsEnv production
+   </Directory>
+
+# Passenger configuration
+   LoadModule passenger_module /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20/buildout/apache2/mod_passenger.so
+   <IfModule mod_passenger.c>
+       PassengerRoot /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20
+       PassengerDefaultRuby /usr/local/rvm/gems/ruby-3.0.0/wrappers/ruby
+   </IfModule>
+
+
+   <IfModule mod_headers.c>
+       RequestHeader set LimitRequestFieldSize 16384
+       LimitRequestLine 8190
+   </IfModule>
+
+   ErrorLog ${APACHE_LOG_DIR}/shadbox_us_error.log
+   CustomLog ${APACHE_LOG_DIR}/shadbox_us_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/us.shadbox.com.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/workhistory.shadbox.com.conf =====
+
+
+<VirtualHost *:80>
+   ServerName workhistory.shadbox.com
+   ServerAlias www.workhistory.shadbox.com
+
+   DocumentRoot /var/www/workhistory/public
+   <Directory /var/www/workhistory/public>
+       Options Indexes FollowSymLinks
+       AllowOverride All
+       Require all granted          
+   </Directory>
+
+   ErrorLog ${APACHE_LOG_DIR}/workhistory_error.log
+   CustomLog ${APACHE_LOG_DIR}/workhistory_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/workhistory.shadbox.com.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/www.biztaxpert.com.conf =====
+
+<VirtualHost *:80>
+   ServerName biztaxpert.com
+   ServerAlias www.biztaxpert.com
+
+   DocumentRoot /var/www/biztaxpert/public
+   <Directory /var/www/biztaxpert/public>
+       AllowOverride all
+       Options -MultiViews
+       Require all granted
+       RailsEnv production
+   </Directory>
+
+   # Passenger configuration
+   #LoadModule passenger_module /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20/buildout/apache2/mod_passenger.so
+   #<IfModule mod_passenger.c>
+       #PassengerRoot /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20
+       #PassengerDefaultRuby /usr/local/rvm/gems/ruby-3.0.0/wrappers/ruby
+   #</IfModule>
+
+   <IfModule mod_headers.c>
+       RequestHeader set LimitRequestFieldSize 16384
+       LimitRequestLine 8190
+   </IfModule>
+
+   ErrorLog ${APACHE_LOG_DIR}/biztaxpert_error.log
+   CustomLog ${APACHE_LOG_DIR}/biztaxpert_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/www.biztaxpert.com.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/zipurl.ai.conf =====
+
+<VirtualHost *:80>
+   ServerName zipurl.ai
+   ServerAlias www.zipurl.ai
+
+   DocumentRoot /var/www/Short-url-ror/public
+   <Directory /var/www/Short-url-ror/public>
+       AllowOverride all
+       Options -MultiViews
+       Require all granted
+       RailsEnv production
+   </Directory>
+
+   ErrorLog ${APACHE_LOG_DIR}/shorturl_error.log
+   CustomLog ${APACHE_LOG_DIR}/shorturl_access.log combined
+</VirtualHost>
+
+# ===== END: /etc/apache2/sites-available/zipurl.ai.conf =====
+var/www/Chat-Wood_Application/public
+    <Directory /var/www/Chat-Wood_Application/public>
+        AllowOverride all
+        Options -MultiViews
+        Require all granted
+        RailsEnv production
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/chatwoot_error.log
+    CustomLog ${APACHE_LOG_DIR}/chatwoot_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/chatwoot-customize.shadbox.com.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/crm.shadbox.com.conf =====
+
+<VirtualHost *:80>
+  ServerName   appstaging.talenttest.co
+  ServerAlias www.appstaging.talenttest.co
+
+  # Point to your app’s public folder
+  DocumentRoot  /var/www/TestPortal-Backend/public
+
+  # Tell Passenger where Ruby is and which env to use
+  PassengerRuby    /usr/local/rvm/wrappers/ruby-3.0.0/ruby
+  PassengerAppEnv production
+  PassengerEnabled on
+  PassengerPreStart http://appstaging.talenttest.co/
+  
+  <Directory /var/www/TestPortal-Backend/public>
+    # allow .htaccess, disable MultiViews, grant access
+    AllowOverride  all
+    Options        -MultiViews
+    Require         all granted
+  </Directory>
+
+  ErrorLog  ${APACHE_LOG_DIR}/TestPortal-Backend_error.log
+  CustomLog ${APACHE_LOG_DIR}/TestPortal-Backend_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/crm.shadbox.com.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/default-ssl.conf =====
+
+<IfModule mod_ssl.c>
+	<VirtualHost _default_:443>
+		ServerAdmin webmaster@localhost
+
+		DocumentRoot /var/www/html
+
+		# Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
+		# error, crit, alert, emerg.
+		# It is also possible to configure the loglevel for particular
+		# modules, e.g.
+		#LogLevel info ssl:warn
+
+		ErrorLog ${APACHE_LOG_DIR}/error.log
+		CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+		# For most configuration files from conf-available/, which are
+		# enabled or disabled at a global level, it is possible to
+		# include a line for only one particular virtual host. For example the
+		# following line enables the CGI configuration for this host only
+		# after it has been globally disabled with "a2disconf".
+		#Include conf-available/serve-cgi-bin.conf
+
+		#   SSL Engine Switch:
+		#   Enable/Disable SSL for this virtual host.
+		SSLEngine on
+
+		#   A self-signed (snakeoil) certificate can be created by installing
+		#   the ssl-cert package. See
+		#   /usr/share/doc/apache2/README.Debian.gz for more info.
+		#   If both key and certificate are stored in the same file, only the
+		#   SSLCertificateFile directive is needed.
+		SSLCertificateFile	/etc/ssl/certs/ssl-cert-snakeoil.pem
+		SSLCertificateKeyFile /etc/ssl/private/ssl-cert-snakeoil.key
+
+		#   Server Certificate Chain:
+		#   Point SSLCertificateChainFile at a file containing the
+		#   concatenation of PEM encoded CA certificates which form the
+		#   certificate chain for the server certificate. Alternatively
+		#   the referenced file can be the same as SSLCertificateFile
+		#   when the CA certificates are directly appended to the server
+		#   certificate for convinience.
+		#SSLCertificateChainFile /etc/apache2/ssl.crt/server-ca.crt
+
+		#   Certificate Authority (CA):
+		#   Set the CA certificate verification path where to find CA
+		#   certificates for client authentication or alternatively one
+		#   huge file containing all of them (file must be PEM encoded)
+		#   Note: Inside SSLCACertificatePath you need hash symlinks
+		#		 to point to the certificate files. Use the provided
+		#		 Makefile to update the hash symlinks after changes.
+		#SSLCACertificatePath /etc/ssl/certs/
+		#SSLCACertificateFile /etc/apache2/ssl.crt/ca-bundle.crt
+
+		#   Certificate Revocation Lists (CRL):
+		#   Set the CA revocation path where to find CA CRLs for client
+		#   authentication or alternatively one huge file containing all
+		#   of them (file must be PEM encoded)
+		#   Note: Inside SSLCARevocationPath you need hash symlinks
+		#		 to point to the certificate files. Use the provided
+		#		 Makefile to update the hash symlinks after changes.
+		#SSLCARevocationPath /etc/apache2/ssl.crl/
+		#SSLCARevocationFile /etc/apache2/ssl.crl/ca-bundle.crl
+
+		#   Client Authentication (Type):
+		#   Client certificate verification type and depth.  Types are
+		#   none, optional, require and optional_no_ca.  Depth is a
+		#   number which specifies how deeply to verify the certificate
+		#   issuer chain before deciding the certificate is not valid.
+		#SSLVerifyClient require
+		#SSLVerifyDepth  10
+
+		#   SSL Engine Options:
+		#   Set various options for the SSL engine.
+		#   o FakeBasicAuth:
+		#	 Translate the client X.509 into a Basic Authorisation.  This means that
+		#	 the standard Auth/DBMAuth methods can be used for access control.  The
+		#	 user name is the `one line' version of the client's X.509 certificate.
+		#	 Note that no password is obtained from the user. Every entry in the user
+		#	 file needs this password: `xxj31ZMTZzkVA'.
+		#   o ExportCertData:
+		#	 This exports two additional environment variables: SSL_CLIENT_CERT and
+		#	 SSL_SERVER_CERT. These contain the PEM-encoded certificates of the
+		#	 server (always existing) and the client (only existing when client
+		#	 authentication is used). This can be used to import the certificates
+		#	 into CGI scripts.
+		#   o StdEnvVars:
+		#	 This exports the standard SSL/TLS related `SSL_*' environment variables.
+		#	 Per default this exportation is switched off for performance reasons,
+		#	 because the extraction step is an expensive operation and is usually
+		#	 useless for serving static content. So one usually enables the
+		#	 exportation for CGI and SSI requests only.
+		#   o OptRenegotiate:
+		#	 This enables optimized SSL connection renegotiation handling when SSL
+		#	 directives are used in per-directory context.
+		#SSLOptions +FakeBasicAuth +ExportCertData +StrictRequire
+		<FilesMatch "\.(cgi|shtml|phtml|php)$">
+				SSLOptions +StdEnvVars
+		</FilesMatch>
+		<Directory /usr/lib/cgi-bin>
+				SSLOptions +StdEnvVars
+		</Directory>
+
+		#   SSL Protocol Adjustments:
+		#   The safe and default but still SSL/TLS standard compliant shutdown
+		#   approach is that mod_ssl sends the close notify alert but doesn't wait for
+		#   the close notify alert from client. When you need a different shutdown
+		#   approach you can use one of the following variables:
+		#   o ssl-unclean-shutdown:
+		#	 This forces an unclean shutdown when the connection is closed, i.e. no
+		#	 SSL close notify alert is send or allowed to received.  This violates
+		#	 the SSL/TLS standard but is needed for some brain-dead browsers. Use
+		#	 this when you receive I/O errors because of the standard approach where
+		#	 mod_ssl sends the close notify alert.
+		#   o ssl-accurate-shutdown:
+		#	 This forces an accurate shutdown when the connection is closed, i.e. a
+		#	 SSL close notify alert is send and mod_ssl waits for the close notify
+		#	 alert of the client. This is 100% SSL/TLS standard compliant, but in
+		#	 practice often causes hanging connections with brain-dead browsers. Use
+		#	 this only for browsers where you know that their SSL implementation
+		#	 works correctly.
+		#   Notice: Most problems of broken clients are also related to the HTTP
+		#   keep-alive facility, so you usually additionally want to disable
+		#   keep-alive for those clients, too. Use variable "nokeepalive" for this.
+		#   Similarly, one has to force some clients to use HTTP/1.0 to workaround
+		#   their broken HTTP/1.1 implementation. Use variables "downgrade-1.0" and
+		#   "force-response-1.0" for this.
+		# BrowserMatch "MSIE [2-6]" \
+		#		nokeepalive ssl-unclean-shutdown \
+		#		downgrade-1.0 force-response-1.0
+
+	</VirtualHost>
+</IfModule>
+
+# vim: syntax=apache ts=4 sw=4 sts=4 sr noet
+
+# ===== END: /etc/apache2/sites-available/default-ssl.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/doctor-appointment.shadbox.com.conf =====
+
+<VirtualHost *:80>
+    ServerName doctor-appointment.shadbox.com
+    ServerAlias www.doctor-appointment.shadbox.com
+
+    DocumentRoot /var/www/doctor-appointment/public
+    <Directory /var/www/doctor-appointment/public>
+        AllowOverride all
+        Options -MultiViews
+        Require all granted
+        RailsEnv production
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/doctor_appointment_error.log
+    CustomLog ${APACHE_LOG_DIR}/doctor_appointment_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/doctor-appointment.shadbox.com.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/faq-testportal.shadbox.com.conf =====
+
+<VirtualHost *:80>
+    ServerName faq-testportal.shadbox.com
+
+    ProxyPreserveHost On
+    ProxyRequests Off
+
+    ProxyPass / http://localhost:4000/
+    ProxyPassReverse / http://localhost:4000/
+
+    # Pass client IP info to backend app
+    RequestHeader set X-Real-IP %{REMOTE_ADDR}e
+    RequestHeader set X-Forwarded-For %{REMOTE_ADDR}e
+    RequestHeader set X-Forwarded-Proto expr=%{REQUEST_SCHEME}
+
+    # Allow proxy for all
+    <Proxy *>
+        Require all granted
+    </Proxy>
+
+    ErrorLog ${APACHE_LOG_DIR}/faq-error.log
+    CustomLog ${APACHE_LOG_DIR}/faq-access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/faq-testportal.shadbox.com.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/gitweb.conf =====
+
+
+<VirtualHost *:80>
+    ServerName gitlab.shadbox.com
+
+    ProxyPreserveHost On
+    ProxyPass / http://127.0.0.1:8080/
+    ProxyPassReverse / http://127.0.0.1:8080/
+    
+    <Proxy *>
+        Order allow,deny
+        Allow from all
+    </Proxy>
+
+    ErrorLog ${APACHE_LOG_DIR}/gitlab_error.log
+    CustomLog ${APACHE_LOG_DIR}/gitlab_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/gitweb.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/lab.shadbox.com.conf =====
+
+
+<VirtualHost *:80>
+    ServerName lab.shadbox.com
+    ServerAlias www.lab.shadbox.com
+
+    DocumentRoot /var/www/TheLabCare/public
+    <Directory /var/www/TheLabCare/public>
+        AllowOverride all
+        Options -MultiViews
+        Require all granted
+        RailsEnv production
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/the_lab_error.log
+    CustomLog ${APACHE_LOG_DIR}/the_lab_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/lab.shadbox.com.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/lawnandhall.shadbox.com.conf =====
+
+<VirtualHost *:80>
+    ServerName lawnandhall.com
+    ServerAlias *.lawnandhall.com
+
+    DocumentRoot /var/www/lawnandhall/public
+    <Directory /var/www/lawnandhall/public>
+        AllowOverride all
+        Options -MultiViews
+        Require all granted
+        RailsEnv development
+        RailsEnv production
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/lawnandhall_dev_error.log
+    CustomLog ${APACHE_LOG_DIR}/lawnandhall_dev_access.log combined
+
+    # Enable HTTP/2
+    Protocols h2 http/1.1
+
+    # Enable Compression
+    <IfModule mod_deflate.c>
+        AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript
+    </IfModule>
+
+    # Enable Caching
+    <IfModule mod_expires.c>
+        ExpiresActive On
+        ExpiresByType image/jpg "access plus 1 month"
+        ExpiresByType image/jpeg "access plus 1 month"
+        ExpiresByType image/gif "access plus 1 month"
+        ExpiresByType image/png "access plus 1 month"
+        ExpiresByType text/css "access plus 1 month"
+        ExpiresByType application/javascript "access plus 1 month"
+    </IfModule>
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/lawnandhall.shadbox.com.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/music_band_api.conf =====
+
+<VirtualHost *:80>
+    ServerName video-call.shadbox.com
+    ServerAlias video-call.shadbox.com
+
+    DocumentRoot /var/www/music_band_api/public
+    <Directory /var/www/music_band_api/public>
+        AllowOverride all
+        Options -MultiViews
+        Require all granted
+        RailsEnv development
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/video-call.shadbox_error.log
+    CustomLog ${APACHE_LOG_DIR}/video-call.shadbox_access.log combined
+</VirtualHost>
+
+# ===== END: /etc/apache2/sites-available/music_band_api.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/music_band_frontend.conf =====
+
+#frontend
+<VirtualHost *:80>
+    ServerName 203.161.58.56
+    ServerAlias 203.161.58.56
+
+    DocumentRoot /var/www/React-Rails_Task/build
+    DirectoryIndex index.html
+
+    <Directory /var/www/React-Rails_Task/build>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    # Handle requests to the root
+    <Location />
+        RewriteEngine On
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteCond %{REQUEST_FILENAME} !-d
+        RewriteRule ^ index.html [L]
+    </Location>
+
+    # Proxy configuration for /api/
+    <Location /api/>
+        ProxyPass https://video-call.shadbox.com/
+        ProxyPassReverse  https://video-call.shadbox.com/
+        ProxyPreserveHost On
+        RequestHeader set X-Real-IP %{REMOTE_ADDR}s
+        RequestHeader set X-Forwarded-For %{REMOTE_ADDR}s
+        RequestHeader set X-Forwarded-Proto %{SCHEME}s
+    </Location>
+</VirtualHost>
+
+# ===== END: /etc/apache2/sites-available/music_band_frontend.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/my_store.conf =====
+
+<VirtualHost *:80>
+    ServerName kamran.shadbox.com
+    ServerAlias www.kamran.shadbox.com
+
+    DocumentRoot /var/www/mechanicalservice/public
+
+    <Directory /var/www/mechanicalservice/public>
+        AllowOverride all
+        Options -MultiViews
+        Require all granted
+        RailsEnv production
+    </Directory>
+
+    # Passenger Configuration
+    LoadModule passenger_module /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20/buildout/apache2/mod_passenger.so
+    <IfModule mod_passenger.c>
+        PassengerRoot /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20
+        PassengerDefaultRuby /usr/local/rvm/gems/ruby-3.0.0/wrappers/ruby
+    </IfModule>
+
+    # Error and Access Logs
+    ErrorLog ${APACHE_LOG_DIR}/mechanicalservice_error.log
+    CustomLog ${APACHE_LOG_DIR}/mechanicalservice_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/my_store.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/newapp.shadbox.com.conf =====
+
+<VirtualHost *:80>
+    ServerName newapp.shadbox.com
+    ServerAlias www.newapp.shadbox.com
+
+    DocumentRoot /var/www/Capivis-App/public
+    <Directory /var/www/Capivis-App/public>
+        AllowOverride all
+        Options -MultiViews
+        Require all granted
+        RailsEnv development
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/newapp_error.log
+    CustomLog ${APACHE_LOG_DIR}/newapp_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/newapp.shadbox.com.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/nikahnama.shadbox.com.conf =====
+
+<VirtualHost *:80>
+    ServerName nikahnama.shadbox.com
+    ServerAlias www.nikahnama.shadbox.com
+
+    DocumentRoot /var/www/Nikah-nama/public
+    <Directory /var/www/Nikah-nama/public>
+        Allow from all
+        Options -MultiViews
+        Require all granted
+    </Directory>
+
+    # This relaxes Apache security settings, letting your application
+    # run under a less privileged account (the default Passenger user)
+    PassengerUser www-data
+
+    # Environment configuration
+    PassengerAppEnv development
+
+    ErrorLog ${APACHE_LOG_DIR}/nikahnama_error.log
+    CustomLog ${APACHE_LOG_DIR}/nikahnama_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/nikahnama.shadbox.com.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/rails_app_8080.conf =====
+
+<VirtualHost 203.161.58.56:8080>
+    ServerName 203.161.58.56
+
+    ProxyPass / http://127.0.0.1:3001/
+    ProxyPassReverse / http://127.0.0.1:3001/
+
+    ErrorLog ${APACHE_LOG_DIR}/rails_app_8080_error.log
+    CustomLog ${APACHE_LOG_DIR}/rails_app_8080_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/rails_app_8080.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/shadbox.com.conf =====
+
+<VirtualHost *:80>
+    ServerName fe.shadbox.com
+    ServerAlias www.fe.shadbox.com
+
+    DocumentRoot /var/www/Upwork-Frontend/dist
+    DirectoryIndex index.html
+
+    <Directory /var/www/Upwork-Frontend/dist>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    # Handle requests to the root
+    <Location />
+        RewriteEngine On
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteCond %{REQUEST_FILENAME} !-d
+        RewriteRule ^ /index.html [L]
+    </Location>
+
+    # Proxy configuration for /api/
+    <Location /api/>
+        ProxyPass https://app.shadbox.com
+        ProxyPassReverse https://app.shadbox.com
+        ProxyPreserveHost On
+        RequestHeader set X-Real-IP %{REMOTE_ADDR}s
+        RequestHeader set X-Forwarded-For %{REMOTE_ADDR}s
+        RequestHeader set X-Forwarded-Proto %{SCHEME}s
+    </Location>
+</VirtualHost>
+
+<VirtualHost *:80>
+    ServerName shadbox.com
+    ServerAlias www.shadbox.com
+
+    DocumentRoot /var/www/Shadbox-FE/dist
+    DirectoryIndex index.html
+
+    <Directory /var/www/Shadbox-FE/dist>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    # Handle requests to the root
+    <Location />
+        RewriteEngine On
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteCond %{REQUEST_FILENAME} !-d
+        RewriteRule ^ /index.html [L]
+    </Location>
+
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/shadbox.com.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/shorturl.shadbox.com.conf =====
+
+<VirtualHost *:80>
+    ServerName shorturl.shadbox.com
+    ServerAlias www.shorturl.shadbox.com
+
+    DocumentRoot /var/www/Short-url-ror/public
+    <Directory /var/www/Short-url-ror/public>
+        AllowOverride all
+        Options -MultiViews
+        Require all granted
+        RailsEnv development
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/shorturl_error.log
+    CustomLog ${APACHE_LOG_DIR}/shorturl_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/shorturl.shadbox.com.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/spree.conf =====
+
+<VirtualHost *:80>
+    ServerName Spree.shadbox.com
+    ServerAlias www.Spree.shadbox.com
+
+    DocumentRoot /var/www/Spree-app/public
+    <Directory /var/www/Spree-app/public>
+        Allow from all
+        Options -MultiViews
+        Require all granted
+    </Directory>
+
+    # This relaxes Apache security settings, letting your application
+    # run under a less privileged account (the default Passenger user)
+    PassengerUser www-data
+
+    # Environment configuration
+    PassengerAppEnv development
+
+    ErrorLog ${APACHE_LOG_DIR}/Spree-app_error.log
+    CustomLog ${APACHE_LOG_DIR}/Spree-app_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/spree.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/stockmanagement.conf =====
+
+<VirtualHost *:80>
+    ServerName stockmanagement.shadbox.com
+    ServerAlias www.stockmanagement.shadbox.com
+
+    DocumentRoot /var/www/stockmanagement/public
+    <Directory /var/www/stockmanagement/public>
+        AllowOverride all
+        Options -MultiViews
+        Require all granted
+        SetEnv RAILS_ENV production
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/stockmanagement_error.log
+    CustomLog ${APACHE_LOG_DIR}/stockmanagement_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/stockmanagement.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/supplyapi.shadbox.com.conf =====
+
+<VirtualHost *:80>
+    ServerName supplyapi.shadbox.com
+    ServerAlias www.supplyapi.shadbox.com
+
+    DocumentRoot /var/www/Supply-sultan-backend/public
+    <Directory /var/www/Supply-sultan-backend/public>
+        AllowOverride all
+        Options -MultiViews
+        Require all granted
+        RailsEnv development
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/supplyapi_error.log
+    CustomLog ${APACHE_LOG_DIR}/supplyapi_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/supplyapi.shadbox.com.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/testportal.frontend.com.conf =====
+
+<VirtualHost *:80>
+    ServerName staging.talenttest.co
+    ServerAlias staging.talenttest.co
+
+    DocumentRoot /var/www/TestPortal-Frontend/frontend/dist
+    DirectoryIndex index.html
+
+    <Directory /var/www/TestPortal-Frontend/frontend/dist>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    # Handle requests to the root
+    <Location />
+        RewriteEngine On
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteCond %{REQUEST_FILENAME} !-d
+        RewriteRule ^ /index.html [L]
+    </Location>
+
+    # Proxy configuration for /api/
+    <Location /api/>
+        ProxyPass https://staging.talenttest.co
+        ProxyPassReverse https://staging.talenttest.co
+        ProxyPreserveHost On
+        RequestHeader set X-Real-IP %{REMOTE_ADDR}s
+        RequestHeader set X-Forwarded-For %{REMOTE_ADDR}s
+        RequestHeader set X-Forwarded-Proto %{SCHEME}s
+    </Location>
+</VirtualHost>
+
+ 
+
+#<VirtualHost *:80>
+ #   ServerName staging.talenttest.co
+  #  ServerAlias staging.talenttest.co
+
+   # DocumentRoot /var/www/TestPortal-Frontend/frontend/dist
+   # DirectoryIndex index.html
+
+   # <Directory /var/www/TestPortal-Frontend/frontend/dist>
+   #     Options Indexes FollowSymLinks
+   #     AllowOverride All
+   #     Require all granted
+   # </Directory>
+
+    # Handle requests to the root
+   # <Location />
+    #    RewriteEngine On
+   #     RewriteCond %{REQUEST_FILENAME} !-f
+   #     RewriteCond %{REQUEST_FILENAME} !-d
+   #     RewriteRule ^ /index.html [L]
+   # </Location>
+
+    # Proxy configuration for /api/
+   # <Location /api/>
+  #      ProxyPass https://staging.talenttest.co
+ #       ProxyPassReverse https://staging.talenttest.co
+ #       ProxyPreserveHost On
+ #       RequestHeader set X-Real-IP %{REMOTE_ADDR}s
+ #       RequestHeader set X-Forwarded-For %{REMOTE_ADDR}s
+#        RequestHeader set X-Forwarded-Proto %{SCHEME}s
+#    </Location>
+#</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/testportal.frontend.com.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/thelab.shadbox.com.conf =====
+
+<VirtualHost *:80>
+    ServerName thelab.shadbox.com
+    ServerAlias www.thelab.shadbox.com
+
+    DocumentRoot /var/www/TheLab/public
+    PassengerEnabled on
+    PassengerAppRoot /var/www/TheLab
+    PassengerRuby /usr/local/rvm/rubies/ruby-3.2.2/wrappers/ruby
+    <Directory /var/www/TheLab/public>
+        AllowOverride all
+        Options -MultiViews
+        Require all granted
+        RailsEnv production
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/the_lab_care_error.log
+    CustomLog ${APACHE_LOG_DIR}/the_lab_care_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/thelab.shadbox.com.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/turfly.co.conf =====
+
+<VirtualHost *:80>
+    ServerName turfly.co
+    ServerAlias www.turfly.co
+
+    DocumentRoot /var/www/turfly/public
+    <Directory /var/www/turfly/public>
+        AllowOverride all
+        Options -MultiViews
+        Require all granted
+        RailsEnv production
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/turfly_error.log
+    CustomLog ${APACHE_LOG_DIR}/turfly_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/turfly.co.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/turfly.shadbox.com.conf =====
+
+<VirtualHost *:80>
+    ServerName turfly.shadbox.com
+    ServerAlias www.turfly.shadbox.com
+
+    DocumentRoot /var/www/turfly/public
+    <Directory /var/www/turfly/public>
+        AllowOverride all
+        Options -MultiViews
+        Require all granted
+        RailsEnv production
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/turfly_error.log
+    CustomLog ${APACHE_LOG_DIR}/turfly_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/turfly.shadbox.com.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/upwork-backend.conf =====
+
+
+# ===== END: /etc/apache2/sites-available/upwork-backend.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/upwork_frontend.conf =====
+
+<VirtualHost *:80>
+    ServerName capavis.shadbox.com
+    ServerAlias capavis.shadbox.com
+
+    DocumentRoot /var/www/ORCA-FE/dist
+    DirectoryIndex index.html
+
+    <Directory /var/www/ORCA-FE/dist>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    # Handle requests to the root
+    <Location />
+        RewriteEngine On
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteCond %{REQUEST_FILENAME} !-d
+        RewriteRule ^ /index.html [L]
+    </Location>
+
+    # Proxy configuration for /api/
+    <Location /api/>
+        ProxyPass https://orca.shadbox.com
+        ProxyPassReverse https://orca.shadbox.com
+        ProxyPreserveHost On
+        RequestHeader set X-Real-IP %{REMOTE_ADDR}s
+        RequestHeader set X-Forwarded-For %{REMOTE_ADDR}s
+        RequestHeader set X-Forwarded-Proto %{SCHEME}s
+    </Location>
+</VirtualHost>
+
+
+
+# ===== END: /etc/apache2/sites-available/upwork_frontend.conf =====
+
+
+
+
+# ===== END: /etc/apache2/sites-available/user_management.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/user_management_tasks.conf =====
+
+
+
+<VirtualHost *:4001>
+    ServerName 203.161.58.56
+    ServerAlias 203.161.58.56
+
+    ProxyPass / http://localhost:4000/
+    ProxyPassReverse / http://localhost:4000/
+
+    ErrorLog ${APACHE_LOG_DIR}/203.161.58.56_error.log
+    CustomLog ${APACHE_LOG_DIR}/203.161.58.56_access.log combined
+</VirtualHost>
+
+# ===== END: /etc/apache2/sites-available/user_management_tasks.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/us.shadbox.com.conf =====
+
+<VirtualHost *:80>
+    ServerName shadbox.us
+    ServerAlias www.shadbox.us
+
+    # Point to the public directory of your Rails application
+    DocumentRoot /var/www/Shadbox-Us-Frontend/dist
+
+    <Directory /var/www/Shadbox-Us-Frontend/dist>
+        AllowOverride all
+        Options -MultiViews
+        Require all granted
+        RailsEnv production
+    </Directory>
+
+# Passenger configuration
+    LoadModule passenger_module /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20/buildout/apache2/mod_passenger.so
+    <IfModule mod_passenger.c>
+        PassengerRoot /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20
+        PassengerDefaultRuby /usr/local/rvm/gems/ruby-3.0.0/wrappers/ruby
+    </IfModule>
+
+
+    <IfModule mod_headers.c>
+        RequestHeader set LimitRequestFieldSize 16384
+        LimitRequestLine 8190
+    </IfModule>
+
+    ErrorLog ${APACHE_LOG_DIR}/shadbox_us_error.log
+    CustomLog ${APACHE_LOG_DIR}/shadbox_us_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/us.shadbox.com.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/workhistory.shadbox.com.conf =====
+
+
+<VirtualHost *:80>
+    ServerName workhistory.shadbox.com
+    ServerAlias www.workhistory.shadbox.com
+
+    DocumentRoot /var/www/workhistory/public
+    <Directory /var/www/workhistory/public>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted          
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/workhistory_error.log
+    CustomLog ${APACHE_LOG_DIR}/workhistory_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/workhistory.shadbox.com.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/www.biztaxpert.com.conf =====
+
+<VirtualHost *:80>
+    ServerName biztaxpert.com
+    ServerAlias www.biztaxpert.com
+
+    DocumentRoot /var/www/biztaxpert/public
+    <Directory /var/www/biztaxpert/public>
+        AllowOverride all
+        Options -MultiViews
+        Require all granted
+        RailsEnv production
+    </Directory>
+
+    # Passenger configuration
+    #LoadModule passenger_module /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20/buildout/apache2/mod_passenger.so
+    #<IfModule mod_passenger.c>
+        #PassengerRoot /usr/local/rvm/gems/ruby-3.0.0/gems/passenger-6.0.20
+        #PassengerDefaultRuby /usr/local/rvm/gems/ruby-3.0.0/wrappers/ruby
+    #</IfModule>
+
+    <IfModule mod_headers.c>
+        RequestHeader set LimitRequestFieldSize 16384
+        LimitRequestLine 8190
+    </IfModule>
+
+    ErrorLog ${APACHE_LOG_DIR}/biztaxpert_error.log
+    CustomLog ${APACHE_LOG_DIR}/biztaxpert_access.log combined
+</VirtualHost>
+
+
+# ===== END: /etc/apache2/sites-available/www.biztaxpert.com.conf =====
+
+
+# ===== START: /etc/apache2/sites-available/zipurl.ai.conf =====
+
+<VirtualHost *:80>
+    ServerName zipurl.ai
+    ServerAlias www.zipurl.ai
+
+    DocumentRoot /var/www/Short-url-ror/public
+    <Directory /var/www/Short-url-ror/public>
+        AllowOverride all
+        Options -MultiViews
+        Require all granted
+        RailsEnv production
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/shorturl_error.log
+    CustomLog ${APACHE_LOG_DIR}/shorturl_access.log combined
+</VirtualHost>
+
+# ===== END: /etc/apache2/sites-available/zipurl.ai.conf =====

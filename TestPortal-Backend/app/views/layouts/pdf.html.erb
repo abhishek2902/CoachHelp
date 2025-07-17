@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Invoice PDF</title>
+    <style>
+      body {
+        font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        color: #555;
+        margin: 0;
+        padding: 0;
+        background: #f8f8f8;
+      }
+      .pdf-container {
+        max-width: 800px;
+        margin: 30px auto;
+        padding: 30px;
+        background: #fff;
+        border: 1px solid #eee;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="pdf-container">
+      <%= yield %>
+    </div>
+  </body>
+</html>
